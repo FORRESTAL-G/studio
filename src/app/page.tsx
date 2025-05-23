@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect, useCallback } from 'react';
@@ -10,15 +11,13 @@ import { getAudioTranscription } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 import { v4 as uuidv4 } from 'uuid'; // For generating unique IDs
 
-// Ensure uuid is installed: npm install uuid @types/uuid
-// For this exercise, we assume it's available or a similar utility is used.
-
 export default function GiUxAlpha2Page() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isAiTyping, setIsAiTyping] = useState(false);
   const [isCallActive, setIsCallActive] = useState(false);
   const [isOnline, setIsOnline] = useState(true); // Default to online
-  const [isSending, setIsSending] = useState(false);
+  // isSending is now primarily for text messages or other async operations
+  const [isSending, setIsSending] = useState(false); 
   const { toast } = useToast();
 
   // Effect for online/offline status (client-side only)
@@ -47,6 +46,8 @@ export default function GiUxAlpha2Page() {
 
   const simulateAiResponse = (userMessageText?: string) => {
     setIsAiTyping(true);
+    // Simulate setting isSending for text messages if the AI response is the async part
+    setIsSending(true); 
     setTimeout(() => {
       let aiResponseText = "I've received your message.";
       if (userMessageText?.toLowerCase().includes("hello") || userMessageText?.toLowerCase().includes("ciao")) {
@@ -56,6 +57,7 @@ export default function GiUxAlpha2Page() {
       }
       addMessage({ sender: 'ai', text: aiResponseText, status: 'sent' });
       setIsAiTyping(false);
+      setIsSending(false); // Reset isSending after AI response for text
     }, 1500 + Math.random() * 1000);
   };
 
@@ -65,66 +67,23 @@ export default function GiUxAlpha2Page() {
       return;
     }
     const userMessageId = uuidv4();
-    setMessages(prev => [...prev, { id: userMessageId, text, sender: 'user', timestamp: Date.now(), status: 'sent' }]);
+    // Assuming sending text itself is quick, but AI response is async
+    addMessage({ id: userMessageId, text, sender: 'user', timestamp: Date.now(), status: 'sent' });
     simulateAiResponse(text);
   };
 
-  const handleSendAudio = async (audioBlob: Blob, duration: number) => {
+  const handleSendAudio = (audioBlob: Blob, duration: number) => {
     if (!isOnline) {
       toast({ title: "Offline", description: "Cannot send audio while offline.", variant: "destructive" });
       return;
     }
     
-    setIsSending(true);
-    const userMessageId = uuidv4();
-    const audioUrl = URL.createObjectURL(audioBlob);
-
-    // Convert Blob to Data URI for AI
-    const reader = new FileReader();
-    reader.readAsDataURL(audioBlob);
-    reader.onloadend = async () => {
-      const audioDataUri = reader.result as string;
-      
-      setMessages(prev => [...prev, { 
-        id: userMessageId, 
-        audioUrl, 
-        audioDataUri,
-        audioDuration: duration, 
-        sender: 'user', 
-        timestamp: Date.now(), 
-        status: 'transcribing' 
-      }]);
-
-      try {
-        const transcriptionResult = await getAudioTranscription({ audioDataUri });
-        updateMessage(userMessageId, {
-          transcription: transcriptionResult.transcription,
-          showTranscription: transcriptionResult.showTranscription,
-          status: 'sent',
-        });
-        // Simulate AI processing the audio content if needed, or just acknowledge
-        setIsAiTyping(true);
-        setTimeout(() => {
-          addMessage({ sender: 'ai', text: "I've processed your audio message.", status: 'sent' });
-          setIsAiTyping(false);
-        }, 1000);
-      } catch (error) {
-        console.error("Transcription error:", error);
-        updateMessage(userMessageId, {
-          transcription: "Failed to transcribe audio.",
-          showTranscription: true,
-          status: 'failed',
-        });
-        toast({ title: "Error", description: "Could not transcribe audio.", variant: "destructive" });
-      } finally {
-        setIsSending(false);
-      }
-    };
-    reader.onerror = () => {
-        console.error("Error converting blob to data URI");
-        toast({ title: "Error", description: "Failed to process audio.", variant: "destructive" });
-        setIsSending(false);
-    };
+    // Feature is disabled, just show a toast.
+    toast({ 
+      title: "Feature Disabled", 
+      description: "Sending and transcribing audio messages is currently disabled."
+    });
+    // No message added to chat, no call to backend, no setIsSending.
   };
 
   const handleToggleCall = () => {
@@ -146,7 +105,7 @@ export default function GiUxAlpha2Page() {
         onSendAudio={handleSendAudio}
         onToggleCall={handleToggleCall}
         isCallActive={isCallActive}
-        isSending={isSending}
+        isSending={isSending} // isSending will now reflect text sending state
       />
       {isCallActive && <VoiceCallUi onClose={() => setIsCallActive(false)} />}
     </div>
