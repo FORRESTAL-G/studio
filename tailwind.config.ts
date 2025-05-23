@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
 export default {
     darkMode: ["class"],
@@ -9,6 +10,10 @@ export default {
   ],
   theme: {
   	extend: {
+      fontFamily: {
+        sans: ["var(--font-geist-sans)", ...fontFamily.sans],
+        mono: ["var(--font-geist-mono)", ...fontFamily.mono],
+      },
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -82,11 +87,17 @@ export default {
   				to: {
   					height: '0'
   				}
-  			}
+  			},
+        'pulse': { // Ensure pulse animation is defined or use Tailwind's default
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '.5' },
+        },
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite', // Ensure pulse animation is defined
+        'pulse-delay-500': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) 0.5s infinite',
   		}
   	}
   },
