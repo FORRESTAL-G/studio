@@ -2,13 +2,12 @@
 "use client";
 
 import React from 'react';
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import { AudioPlayer } from "@/components/chat/audio-player";
 import type { Message } from "@/types";
 import { cn } from "@/lib/utils";
 import { useTranslation } from '@/contexts/i18n-provider';
-import { User as UserIcon, AlertCircle, CheckCircle, Clock } from 'lucide-react';
+import { AlertCircle, CheckCircle, Clock } from 'lucide-react';
 
 interface MessageItemProps {
   message: Message;
@@ -27,11 +26,11 @@ export function MessageItem({ message }: MessageItemProps) {
 
   return (
     <div className={cn("flex items-end gap-2 my-2", isUser ? "justify-end" : "justify-start")}>
-      {/* AI Avatar removed from here */}
       <Card className={cn(
-        "max-w-[75%] rounded-xl shadow-lg", // Changed shadow-md to shadow-lg
+        "max-w-[75%] rounded-xl shadow-lg", 
         isUser ? "bg-primary text-primary-foreground rounded-br-none" : "bg-card text-card-foreground rounded-bl-none",
-        !isUser && "ml-0" // Ensure AI message aligns left if no avatar space is needed. Consider if a specific margin is needed for alignment without avatar.
+        !isUser && "ml-0",
+        isUser && "mr-0" // Ensure user message aligns right if no avatar space is needed
       )}>
         <CardContent className="p-3">
           {message.text && <p className="whitespace-pre-wrap break-words">{message.text}</p>}
@@ -55,11 +54,7 @@ export function MessageItem({ message }: MessageItemProps) {
           </div>
         </CardContent>
       </Card>
-      {isUser && (
-         <Avatar className="h-8 w-8 self-start">
-           <AvatarFallback><UserIcon size={20} /></AvatarFallback>
-        </Avatar>
-      )}
+      {/* User Avatar removed from here */}
     </div>
   );
 }
