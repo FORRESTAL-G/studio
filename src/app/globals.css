@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -44,25 +45,25 @@
   }
 
   .dark {
-    --background: 174 13% 23%; /* Dark Theme: Dark desaturated teal */
-    --foreground: 174 10% 85%; /* Dark Theme: Light tealish gray */
-    --card: 174 13% 28%; /* Dark Theme: Slightly lighter than background */
-    --card-foreground: 174 10% 85%;
-    --popover: 174 13% 28%;
-    --popover-foreground: 174 10% 85%;
-    --primary: 174 71% 46%; /* Vibrant teal */
-    --primary-foreground: 174 13% 10%; /* Dark for text on primary */
-    --secondary: 174 13% 30%; /* Darker teal for secondary elements */
-    --secondary-foreground: 174 10% 80%;
-    --muted: 174 13% 35%;
-    --muted-foreground: 174 10% 65%;
-    --accent: 144 64% 48%; /* Greener accent */
-    --accent-foreground: 144 13% 10%; /* Dark for text on accent */
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 174 10% 40%;
-    --input: 174 10% 30%; /* Darker input background */
-    --ring: 174 71% 46%; /* Primary color for rings */
+    --background: 174 10% 15%; /* Darker, less saturated teal-gray */
+    --foreground: 174 5% 90%; /* Lighter, less saturated for cleanness */
+    --card: 174 10% 20%; /* Darker, less saturated */
+    --card-foreground: 174 5% 90%; /* Matches new foreground */
+    --popover: 174 10% 20%; /* Matches new card */
+    --popover-foreground: 174 5% 90%; /* Matches new foreground */
+    --primary: 174 71% 46%; /* Vibrant teal - kept */
+    --primary-foreground: 174 10% 10%; /* Dark for text on primary - kept */
+    --secondary: 174 10% 25%; /* Darker, less saturated */
+    --secondary-foreground: 174 5% 80%; /* Less saturated */
+    --muted: 174 10% 22%; /* Significantly darker, less saturated */
+    --muted-foreground: 174 5% 60%; /* Darker, less saturated */
+    --accent: 174 65% 50%; /* Teal-based for homogeneity, related to primary */
+    --accent-foreground: 174 10% 10%; /* Dark for text on new accent */
+    --destructive: 0 70% 45%; /* Standard destructive red, slightly brighter */
+    --destructive-foreground: 0 0% 98%; /* Kept */
+    --border: 174 8% 28%; /* Darker, less saturated */
+    --input: 174 8% 22%; /* Darker, less saturated */
+    --ring: 174 71% 46%; /* Primary color for rings - kept */
 
     /* Chart colors for dark theme (can be adjusted) */
     --chart-1: 220 70% 50%;
