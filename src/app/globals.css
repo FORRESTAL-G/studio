@@ -93,3 +93,8 @@
     /* Removed fixed font-family to allow Next/Font to work */
   }
 }
+
+/* Custom styles for dark mode code blocks */
+.dark .prose-invert pre {
+  background-color: hsl(174, 10%, 8%);
+}
