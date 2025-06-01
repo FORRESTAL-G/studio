@@ -96,5 +96,6 @@
 
 /* Custom styles for dark mode code blocks */
 .dark .prose-invert pre {
-  background-color: hsl(174, 10%, 8%);
+  background-color: hsl(0, 0%, 0%); /* Totally black background */
 }
+

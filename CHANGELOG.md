@@ -142,3 +142,13 @@ Implemented Markdown rendering for chat messages, allowing users to send and vie
     - Removed `whitespace-pre-wrap` and `break-words` classes as `react-markdown` handles text formatting.
 
 This allows users to use Markdown syntax in their messages, which will be rendered as formatted HTML in the chat interface.
+
+## Checkpoint 11: Code Block Background in Dark Mode (YYYY-MM-DD HH:MM)
+
+**Description:**
+Adjusted the background of code blocks within chat messages in dark mode to be totally black for improved readability and contrast.
+
+- **Styling (`src/app/globals.css`):**
+    - Modified the custom style targeting `pre` elements within `.dark .prose-invert`.
+    - Set `background-color` to `hsl(0, 0%, 0%)` (totally black).
+    - This change affects lines 82-84 in `src/app/globals.css` as of this checkpoint.
