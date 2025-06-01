@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Send, Phone, PhoneOff, Loader2 } from 'lucide-react';
+import { ArrowUp, Phone, PhoneOff, Loader2 } from 'lucide-react'; // Changed Send to ArrowUp
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { AudioRecorder } from '@/components/chat/audio-recorder';
@@ -52,14 +52,14 @@ export function Footer({
           />
           <Button
             type="submit"
-            className="h-12 w-12 p-0 flex items-center justify-center rounded-md flex-shrink-0"
+            className="h-12 w-12 p-0 flex items-center justify-center rounded-full flex-shrink-0" // Changed rounded-md to rounded-full
             disabled={!messageText.trim() || isSending}
             aria-label={t('sendMessage')}
           >
             {isSending && !messageText.trim() ? (
               <Loader2 className="h-6 w-6 animate-spin" />
             ) : (
-              <Send className="h-6 w-6" />
+              <ArrowUp className="h-6 w-6" /> // Changed Send icon to ArrowUp
             )}
           </Button>
           
