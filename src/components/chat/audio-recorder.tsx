@@ -6,6 +6,7 @@ import { Mic, StopCircle, AlertTriangle, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from '@/contexts/i18n-provider';
 import { Progress } from '@/components/ui/progress';
+import { cn } from '@/lib/utils';
 
 interface AudioRecorderProps {
   onRecordingComplete: (audioBlob: Blob, duration: number) => void;
@@ -138,7 +139,10 @@ export function AudioRecorder({ onRecordingComplete, disabled }: AudioRecorderPr
       <Button
         variant={isRecording ? "destructive" : "outline"}
         size="icon"
-        className="h-12 w-12 rounded-full flex items-center justify-center"
+        className={cn(
+          "h-12 w-12 rounded-full flex items-center justify-center",
+          isRecording && "ring-2 ring-white ring-offset-2 ring-offset-background"
+        )}
         onClick={isRecording ? stopRecording : startRecording}
         disabled={disabled || (permissionGranted === null && !isRecording)} /* Disable if permission not yet checked */
         aria-label={isRecording ? t('stopRecording') : t('startRecording')}
