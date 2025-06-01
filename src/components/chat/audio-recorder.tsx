@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useRef, useEffect } from 'react';
@@ -117,16 +118,16 @@ export function AudioRecorder({ onRecordingComplete, disabled }: AudioRecorderPr
 
   if (!isSupported) {
     return (
-      <Button variant="outline" size="icon" disabled>
-        <AlertTriangle className="h-5 w-5 text-destructive" />
+      <Button variant="outline" size="icon" className="h-12 w-12 rounded-full" disabled>
+        <AlertTriangle className="h-6 w-6 text-destructive" />
       </Button>
     );
   }
   
   if (permissionGranted === false) {
      return (
-      <Button variant="outline" size="icon" onClick={requestPermission} aria-label="Microphone permission denied. Click to retry.">
-        <AlertTriangle className="h-5 w-5 text-destructive" />
+      <Button variant="outline" size="icon" onClick={requestPermission} aria-label="Microphone permission denied. Click to retry." className="h-12 w-12 rounded-full">
+        <AlertTriangle className="h-6 w-6 text-destructive" />
       </Button>
     );
   }
@@ -137,15 +138,16 @@ export function AudioRecorder({ onRecordingComplete, disabled }: AudioRecorderPr
       <Button
         variant={isRecording ? "destructive" : "outline"}
         size="icon"
+        className="h-12 w-12 rounded-full flex items-center justify-center"
         onClick={isRecording ? stopRecording : startRecording}
         disabled={disabled || (permissionGranted === null && !isRecording)} /* Disable if permission not yet checked */
         aria-label={isRecording ? t('stopRecording') : t('startRecording')}
       >
-        {isRecording ? <StopCircle className="h-5 w-5" /> : <Mic className="h-5 w-5" />}
+        {isRecording ? <StopCircle className="h-6 w-6" /> : <Mic className="h-6 w-6" />}
       </Button>
       {isRecording && (
-        <div className="w-full flex items-center gap-2">
-          <Progress value={recordingProgress} className="h-1.5 flex-grow" />
+        <div className="w-full flex items-center gap-2 mt-1">
+          <Progress value={recordingProgress} className="h-1 flex-grow" />
           <span className="text-xs text-muted-foreground">{recordingTimeSeconds}s</span>
         </div>
       )}
