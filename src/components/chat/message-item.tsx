@@ -29,7 +29,7 @@ export function MessageItem({ message }: MessageItemProps) {
     <div className={cn("flex items-end gap-2 my-2", isUser ? "justify-end" : "justify-start")}>
       {/* AI Avatar removed from here */}
       <Card className={cn(
-        "max-w-[75%] rounded-xl shadow-md",
+        "max-w-[75%] rounded-xl shadow-lg", // Changed shadow-md to shadow-lg
         isUser ? "bg-primary text-primary-foreground rounded-br-none" : "bg-card text-card-foreground rounded-bl-none",
         !isUser && "ml-0" // Ensure AI message aligns left if no avatar space is needed. Consider if a specific margin is needed for alignment without avatar.
       )}>
