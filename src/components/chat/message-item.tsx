@@ -2,6 +2,7 @@
 "use client";
 
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 import { Card, CardContent } from "@/components/ui/card";
 import { AudioPlayer } from "@/components/chat/audio-player";
 import type { Message } from "@/types";
@@ -27,13 +28,17 @@ export function MessageItem({ message }: MessageItemProps) {
   return (
     <div className={cn("flex items-end gap-2 my-2", isUser ? "justify-end" : "justify-start")}>
       <Card className={cn(
-        "max-w-[75%] rounded-xl shadow-lg", 
+        "max-w-[75%] rounded-xl shadow-lg",
         isUser ? "bg-primary text-primary-foreground rounded-br-none" : "bg-card text-card-foreground rounded-bl-none",
         !isUser && "ml-0",
-        isUser && "mr-0" // Ensure user message aligns right if no avatar space is needed
+        isUser && "mr-0"
       )}>
         <CardContent className="p-3">
-          {message.text && <p className="whitespace-pre-wrap break-words">{message.text}</p>}
+          {message.text && (
+            <div className="prose prose-sm dark:prose-invert max-w-none">
+              <ReactMarkdown>{message.text}</ReactMarkdown>
+            </div>
+          )}
           {message.audioUrl && (
             <div className="mt-1">
               <AudioPlayer audioUrl={message.audioUrl} audioDuration={message.audioDuration} />
@@ -54,7 +59,6 @@ export function MessageItem({ message }: MessageItemProps) {
           </div>
         </CardContent>
       </Card>
-      {/* User Avatar removed from here */}
     </div>
   );
 }
