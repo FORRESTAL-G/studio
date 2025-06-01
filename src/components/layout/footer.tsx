@@ -35,7 +35,7 @@ export function Footer({
   };
 
   return (
-    <footer className="sticky bottom-0 w-full border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-2 sm:p-4">
+    <footer className="sticky bottom-0 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-2 sm:p-4">
       <div className="container mx-auto">
         {/* Removed onSubmit from form */}
         <form className="flex items-end w-full">
@@ -86,3 +86,4 @@ export function Footer({
     </footer>
   );
 }
+
